@@ -35,7 +35,7 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-react-html-attrs": "^2.0.0",
     "body-parser": "^1.18.3",
-    "concurrently": "^4.1.0",
+    "concurrently": "4.1.1",
     "cookie-parser": "^1.4.3",
     "css-loader": "3.0.0",
     "debug": "^4.1.0",

@@ -17,6 +17,9 @@ class User extends Component {
             <li>
               <a href="/users">Users</a>
             </li>
+            <li>
+              <a href="/nodes">Nodes</a>
+            </li>
           </ul>
         </div>
       </div>
