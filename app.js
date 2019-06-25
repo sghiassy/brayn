@@ -21,6 +21,8 @@ app.use("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "src", "index.html"));
 });
 
-app.listen(process.env.PORT, () =>
+const port = process.env.PORT || 3000;
+
+app.listen(port, () =>
   console.log(`Server is listening on port ${process.env.PORT}`)
 );
