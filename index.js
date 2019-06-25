@@ -14,28 +14,32 @@ const driver = neo4j.driver(graphenedbURL, neo4j.auth.basic(graphenedbUser, grap
 
 app.use(logger('dev'))
 
+var session = driver.session()
+
 app.get('/', (req, res) => {
-    res.send('Hello World from Heroku')
+    session
+        .run("CREATE (n {hello: 'World'}) RETURN n.name")
+        .then(function (result) {
+            result.records.forEach(function (record) {
+                // console.log(record)
+                res.send(record)
+            });
+
+            session.close();
+        })
+        .catch(function (error) {
+            // console.log(error);
+            res.send(error)
+        });
 })
 
 // app.use(serveStatic(path.join(__dirname, '/build'), {
 //     maxAge: '1d'
 // }))
 
-var session = driver.session();
-session
-    .run("CREATE (n {hello: 'World'}) RETURN n.name")
-    .then(function (result) {
-        result.records.forEach(function (record) {
-            console.log(record)
-        });
 
-        session.close();
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+
 
 const port = process.env.PORT || 9000;
 
-// app.listen(port, () => console.log(`Listening on port ${port}!`))
+app.listen(port, () => console.log(`Listening on port ${port}!`))
