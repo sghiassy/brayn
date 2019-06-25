@@ -5,7 +5,7 @@ class Node extends Component {
     super(props)
     this.state = {
       node: {
-        name: ""
+        name: "-"
       }
     }
   }
