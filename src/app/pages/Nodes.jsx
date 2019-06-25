@@ -1,8 +1,7 @@
-import React from "react";
-import { render } from "react-dom";
+import React from "react"
 
-import Node from "../components/Node.jsx";
-import Menu from "../components/Menu.jsx";
+import Node from "../components/Node.jsx"
+import Menu from "../components/Menu.jsx"
 
 class Home extends React.Component {
   render() {
@@ -14,8 +13,8 @@ class Home extends React.Component {
           <Node />
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Home;
+export default Home
