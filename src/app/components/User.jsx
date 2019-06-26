@@ -8,7 +8,7 @@ class User extends Component {
         name: ""
       }
     };
-    this.fetchUsers = this.fetchUsers.bind(this);
+    this.fetchUsers = this.fetchUsers.bind(this)
   }
 
   fetchUsers() {
@@ -19,8 +19,8 @@ class User extends Component {
       .then(json => {
         this.setState({
           user: json
-        });
-      });
+        })
+      })
   }
 
   componentWillMount() {
@@ -33,8 +33,8 @@ class User extends Component {
         <h1>Hello {this.state.user.name}</h1>
         <a href="/users/postUser">Create Node</a>
       </div>
-    );
+    )
   }
 }
 
-export default User;
+export default User
