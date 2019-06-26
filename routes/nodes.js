@@ -27,4 +27,19 @@ router.post('/', (req, res, next) => {
     })
 })
 
+router.delete('/:id', (req, res, next) => {
+  if (req.params.id == undefined) {
+    return res.send("id is undefined:" + JSON.stringify(req.params))
+  }
+  session
+    .run("MATCH (n) where id(n) = " + req.params.id + " DETACH DELETE n")
+    .then(function (result) {
+      res.send(result)
+    })
+    .catch(function (error) {
+      res.send(error)
+    })
+
+})
+
 module.exports = router
