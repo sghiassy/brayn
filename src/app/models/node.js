@@ -1,6 +1,7 @@
 class NodeModel {
   constructor(raw) {
-    this.name = raw["_fields"][0]["properties"]["name"] || "N/A"
+    this.id = raw["_fields"][0]["id"]["low"]
+    this.name = raw["_fields"][0]["name"] || "N/A"
   }
 }
 

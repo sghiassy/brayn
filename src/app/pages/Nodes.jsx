@@ -36,7 +36,7 @@ class Home extends React.Component {
   renderNodes() {
     let nodesToRender = this.state.nodes.map((n) => {
       return (
-        <Node name={n.name} />
+        <Node node={n} />
       )
     })
     return nodesToRender
