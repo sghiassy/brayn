@@ -13,6 +13,10 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
+  if (req.body.name == undefined) {
+    return res.send("Name was undefined in body:" + JSON.stringify(req.body))
+  }
+
   session
     .run("CREATE (n:Person { name: '" + req.body.name + "', title: 'Developer' })")
     .then(function (result) {

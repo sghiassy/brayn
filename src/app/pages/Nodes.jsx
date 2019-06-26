@@ -3,6 +3,7 @@ import React from "react"
 import Node from "../components/Node.jsx"
 import Menu from "../components/Menu.jsx"
 import NodeModel from "../models/node.js"
+import AddNodeList from "../components/AddNodeInput.jsx"
 
 class Home extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class Home extends React.Component {
           <h1>Nodes Page3</h1>
           {nodes}
         </div>
+        <AddNodeList />
       </div>
     )
   }
