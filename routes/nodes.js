@@ -12,4 +12,15 @@ router.get('/', (req, res, next) => {
     })
 })
 
+router.post('/', (req, res, next) => {
+  session
+    .run("CREATE (n:Person { name: '" + req.body.name + "', title: 'Developer' })")
+    .then(function (result) {
+      res.send(result)
+    })
+    .catch(function (error) {
+      res.send(error)
+    })
+})
+
 module.exports = router
