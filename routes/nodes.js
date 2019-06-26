@@ -3,7 +3,7 @@ const router = express.Router()
 
 router.get('/', (req, res, next) => {
   session
-    .run("MATCH (n) RETURN n LIMIT 25")
+    .run("MATCH (n) RETURN { id: ID(n), name: n.name } LIMIT 25")
     .then(function (result) {
       res.send(result)
     })
