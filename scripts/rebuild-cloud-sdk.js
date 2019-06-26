@@ -6,7 +6,7 @@ module.exports = {
   description: 'Regenerate the configuration for the "Cloud SDK" -- the JavaScript module used for AJAX and WebSockets.',
 
 
-  fn: async function(){
+  fn: async function() {
 
     var path = require('path');
 

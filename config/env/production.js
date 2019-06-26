@@ -252,7 +252,7 @@ module.exports = {
     ***************************************************************************/
     onlyAllowOrigins: [
       'https://brayn.herokuapp.com',
-      'https://localhost',
+      'https://localhost:1337',
     ],
 
 
