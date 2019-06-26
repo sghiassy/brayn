@@ -1,8 +1,7 @@
-import React from "react";
-import { render } from "react-dom";
+import React from "react"
 
-import User from "../components/User.jsx";
-import Menu from "../components/Menu.jsx";
+import User from "../components/User.jsx"
+import Menu from "../components/Menu.jsx"
 
 class Home extends React.Component {
   render() {
@@ -21,8 +20,8 @@ class Home extends React.Component {
           </p>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Home;
+export default Home
