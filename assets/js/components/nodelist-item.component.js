@@ -11,9 +11,12 @@ parasails.registerComponent('nodeListItem', {
   //  ╔═╗╦═╗╔═╗╔═╗╔═╗
   //  ╠═╝╠╦╝║ ║╠═╝╚═╗
   //  ╩  ╩╚═╚═╝╩  ╚═╝
-  props: [
-    'node', // «  The name of the node
-  ],
+  props: {
+    'node': {
+      type: Object,
+      required: true
+    }
+  },
 
   //  ╦ ╦╔╦╗╔╦╗╦
   //  ╠═╣ ║ ║║║║
