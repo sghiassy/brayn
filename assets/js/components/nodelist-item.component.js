@@ -12,13 +12,13 @@ parasails.registerComponent('nodeListItem', {
   //  ╠═╝╠╦╝║ ║╠═╝╚═╗
   //  ╩  ╩╚═╚═╝╩  ╚═╝
   props: [
-    'name', // «  The name of the node
+    'node', // «  The name of the node
   ],
 
   //  ╦ ╦╔╦╗╔╦╗╦
   //  ╠═╣ ║ ║║║║
   //  ╩ ╩ ╩ ╩ ╩╩═╝
   template: `
-  <span>I am the name:{{name}}</span>
+    <li>Node: {{node.text}}</li>
   `
 });
