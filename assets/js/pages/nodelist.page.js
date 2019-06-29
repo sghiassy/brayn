@@ -3,7 +3,19 @@ parasails.registerPage('nodelist', {
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
-    //…
+    nodes: [{
+        id: 0,
+        text: '1Vegetables'
+      },
+      {
+        id: 1,
+        text: '1Cheese'
+      },
+      {
+        id: 2,
+        text: '1Whatever else humans are supposed to eat'
+      }
+    ]
   },
 
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗

@@ -12,7 +12,7 @@ parasails.registerComponent('nodeListz', {
   //  ╠═╝╠╦╝║ ║╠═╝╚═╗
   //  ╩  ╩╚═╚═╝╩  ╚═╝
   props: [
-    // 'nodes', // «  The name of the node
+    'nodes', // «  The name of the node
   ],
 
   //  ╦ ╦╔╦╗╔╦╗╦
@@ -26,23 +26,5 @@ parasails.registerComponent('nodeListz', {
           v-bind:key="node.id">
         </node-list-item>
       </ol>
-  `,
-
-  data: function() {
-    return {
-      nodes: [{
-          id: 0,
-          text: 'Vegetables'
-        },
-        {
-          id: 1,
-          text: 'Cheese'
-        },
-        {
-          id: 2,
-          text: 'Whatever else humans are supposed to eat'
-        }
-      ]
-    }
-  }
+  `
 });
