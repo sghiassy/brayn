@@ -3,18 +3,7 @@ parasails.registerPage('nodelist', {
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
-    nodes: [{
-        id: 0,
-        text: '1Vegetables'
-      },
-      {
-        id: 1,
-        text: '1Cheese'
-      },
-      {
-        id: 2,
-        text: '1Whatever else humans are supposed to eat'
-      }
+    nodes: [
     ]
   },
 
@@ -27,6 +16,24 @@ parasails.registerPage('nodelist', {
   },
   mounted: async function() {
     //…
+    // this.$set(this.data, '', 2)
+    var that = this
+
+    setTimeout(function() {
+      that.nodes = [{
+          id: 0,
+          text: '1Vegetables'
+        },
+        {
+          id: 1,
+          text: '2Cheese'
+        },
+        {
+          id: 2,
+          text: '1Whatever else humans are supposed to eat'
+        }
+      ]
+    }, 1000)
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
