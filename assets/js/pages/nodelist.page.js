@@ -57,6 +57,7 @@ parasails.registerPage('nodelist', {
     // },
     submitForm: async function() {
       this.syncing = true
+      const that = this
       console.log('I am submitting form', this.formData)
       return new Promise((resolve, reject)=>{
         var xhr = new XMLHttpRequest()
@@ -66,6 +67,7 @@ parasails.registerPage('nodelist', {
           if (this.readyState === 4) {
             if (this.status === 200) {
               console.log('POST worked with:', xhr.response)
+              that.nodes.push(JSON.parse(xhr.response))
               resolve()
             } else {
               reject()

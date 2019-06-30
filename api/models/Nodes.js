@@ -32,9 +32,13 @@ module.exports = {
   create: async function (name) {
     return new Promise((resolve, reject) => {
       session
-        .run('CREATE (n:Person { name: \'' + name + '\', title: \'Developer\' })')
+        .run('CREATE (n:Person { name: \'' + name + '\', title: \'Developer\' }) RETURN { id: ID(n), name: n.name }')
         .then((result) => {
-          resolve(result)
+          let nodeData = result.records[0]['_fields'][0]
+          let id = nodeData.id.low
+          let name = nodeData.name
+          let newNode = new GraphNode(id, name)
+          resolve(newNode)
         })
         .catch((error) => {
           reject(error)
