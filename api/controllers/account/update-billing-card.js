@@ -57,7 +57,7 @@ module.exports = {
     var stripeCustomerId = await sails.helpers.stripe.saveBillingInfo.with({
       stripeCustomerId: this.req.me.stripeCustomerId,
       token: inputs.stripeToken || '',
-    }).timeout(5000).retry();
+    }).timeout(5000).retry()
 
     // Update (or clear) the card info we have stored for this user in our database.
     // > Remember, never store complete card numbers-- only the last 4 digits + expiration!
@@ -71,9 +71,9 @@ module.exports = {
       billingCardLast4: inputs.stripeToken ? inputs.billingCardLast4 : '',
       billingCardExpMonth: inputs.stripeToken ? inputs.billingCardExpMonth : '',
       billingCardExpYear: inputs.stripeToken ? inputs.billingCardExpYear : ''
-    });
+    })
 
   }
 
 
-};
+}

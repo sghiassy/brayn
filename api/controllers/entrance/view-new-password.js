@@ -35,23 +35,23 @@ module.exports = {
 
     // If password reset token is missing, display an error page explaining that the link is bad.
     if (!inputs.token) {
-      sails.log.warn('Attempting to view new password (recovery) page, but no reset password token included in request!  Displaying error page...');
-      throw 'invalidOrExpiredToken';
+      sails.log.warn('Attempting to view new password (recovery) page, but no reset password token included in request!  Displaying error page...')
+      throw 'invalidOrExpiredToken'
     }//•
 
     // Look up the user with this reset token.
-    var userRecord = await User.findOne({ passwordResetToken: inputs.token });
+    var userRecord = await User.findOne({ passwordResetToken: inputs.token })
     // If no such user exists, or their token is expired, display an error page explaining that the link is bad.
     if (!userRecord || userRecord.passwordResetTokenExpiresAt <= Date.now()) {
-      throw 'invalidOrExpiredToken';
+      throw 'invalidOrExpiredToken'
     }
 
     // Grab token and include it in view locals
     return {
       token: inputs.token
-    };
+    }
 
   }
 
 
-};
+}

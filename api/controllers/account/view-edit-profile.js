@@ -18,9 +18,9 @@ module.exports = {
 
   fn: async function () {
 
-    return {};
+    return {}
 
   }
 
 
-};
+}

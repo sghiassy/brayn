@@ -26,12 +26,12 @@ module.exports = {
   fn: async function () {
 
     if (this.req.me) {
-      throw {redirect:'/welcome'};
+      throw {redirect:'/welcome'}
     }
 
-    return {};
+    return {}
 
   }
 
 
-};
+}

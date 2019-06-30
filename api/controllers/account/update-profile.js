@@ -32,29 +32,29 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    var newEmailAddress = inputs.emailAddress;
+    var newEmailAddress = inputs.emailAddress
     if (newEmailAddress !== undefined) {
-      newEmailAddress = newEmailAddress.toLowerCase();
+      newEmailAddress = newEmailAddress.toLowerCase()
     }
 
     // Determine if this request wants to change the current user's email address,
     // revert her pending email address change, modify her pending email address
     // change, or if the email address won't be affected at all.
-    var desiredEmailEffect;// ('change-immediately', 'begin-change', 'cancel-pending-change', 'modify-pending-change', or '')
+    var desiredEmailEffect// ('change-immediately', 'begin-change', 'cancel-pending-change', 'modify-pending-change', or '')
     if (
       newEmailAddress === undefined ||
       (this.req.me.emailStatus !== 'change-requested' && newEmailAddress === this.req.me.emailAddress) ||
       (this.req.me.emailStatus === 'change-requested' && newEmailAddress === this.req.me.emailChangeCandidate)
     ) {
-      desiredEmailEffect = '';
+      desiredEmailEffect = ''
     } else if (this.req.me.emailStatus === 'change-requested' && newEmailAddress === this.req.me.emailAddress) {
-      desiredEmailEffect = 'cancel-pending-change';
+      desiredEmailEffect = 'cancel-pending-change'
     } else if (this.req.me.emailStatus === 'change-requested' && newEmailAddress !== this.req.me.emailAddress) {
-      desiredEmailEffect = 'modify-pending-change';
+      desiredEmailEffect = 'modify-pending-change'
     } else if (!sails.config.custom.verifyEmailAddresses || this.req.me.emailStatus === 'unconfirmed') {
-      desiredEmailEffect = 'change-immediately';
+      desiredEmailEffect = 'change-immediately'
     } else {
-      desiredEmailEffect = 'begin-change';
+      desiredEmailEffect = 'begin-change'
     }
 
 
@@ -65,9 +65,9 @@ module.exports = {
           { emailAddress: newEmailAddress },
           { emailChangeCandidate: newEmailAddress }
         ]
-      });
+      })
       if (conflictingUser) {
-        throw 'emailAlreadyInUse';
+        throw 'emailAlreadyInUse'
       }
     }
 
@@ -76,7 +76,7 @@ module.exports = {
     // (We always set the fullName if provided.)
     var valuesToSet = {
       fullName: inputs.fullName,
-    };
+    }
 
     switch (desiredEmailEffect) {
 
@@ -88,8 +88,8 @@ module.exports = {
           emailProofToken: '',
           emailProofTokenExpiresAt: 0,
           emailStatus: this.req.me.emailStatus === 'unconfirmed' ? 'unconfirmed' : 'confirmed'
-        });
-        break;
+        })
+        break
 
       // Begin new email change, or modify a pending email change
       case 'begin-change':
@@ -99,8 +99,8 @@ module.exports = {
           emailProofToken: await sails.helpers.strings.random('url-friendly'),
           emailProofTokenExpiresAt: Date.now() + sails.config.custom.emailProofTokenTTL,
           emailStatus: 'change-requested'
-        });
-        break;
+        })
+        break
 
       // Cancel pending email change
       case 'cancel-pending-change':
@@ -109,15 +109,15 @@ module.exports = {
           emailProofToken: '',
           emailProofTokenExpiresAt: 0,
           emailStatus: 'confirmed'
-        });
-        break;
+        })
+        break
 
       // Otherwise, do nothing re: email
     }
 
     // Save to the db
     await User.updateOne({id: this.req.me.id })
-    .set(valuesToSet);
+    .set(valuesToSet)
 
     // If this is an immediate change, and billing features are enabled,
     // then also update the billing email for this user's linked customer entry
@@ -127,16 +127,16 @@ module.exports = {
     // > database.  (This could happen if Stripe credentials were not configured
     // > at the time this user was originally created.)
     if(desiredEmailEffect === 'change-immediately' && sails.config.custom.enableBillingFeatures) {
-      let didNotAlreadyHaveCustomerId = (! this.req.me.stripeCustomerId);
+      let didNotAlreadyHaveCustomerId = (! this.req.me.stripeCustomerId)
       let stripeCustomerId = await sails.helpers.stripe.saveBillingInfo.with({
         stripeCustomerId: this.req.me.stripeCustomerId,
         emailAddress: newEmailAddress
-      }).timeout(5000).retry();
+      }).timeout(5000).retry()
       if (didNotAlreadyHaveCustomerId){
         await User.updateOne({ id: this.req.me.id })
         .set({
           stripeCustomerId
-        });
+        })
       }
     }
 
@@ -151,10 +151,10 @@ module.exports = {
           fullName: inputs.fullName||this.req.me.fullName,
           token: valuesToSet.emailProofToken
         }
-      });
+      })
     }
 
   }
 
 
-};
+}

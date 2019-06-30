@@ -76,16 +76,16 @@ and exposed as \`req.me\`.)`
     // regardless of which database we're using)
     var userRecord = await User.findOne({
       emailAddress: inputs.emailAddress.toLowerCase(),
-    });
+    })
 
     // If there was no matching user, respond thru the "badCombo" exit.
     if(!userRecord) {
-      throw 'badCombo';
+      throw 'badCombo'
     }
 
     // If the password doesn't match, then also exit thru "badCombo".
     await sails.helpers.passwords.checkPassword(inputs.password, userRecord.password)
-    .intercept('incorrect', 'badCombo');
+    .intercept('incorrect', 'badCombo')
 
     // If "Remember Me" was enabled, then keep the session alive for
     // a longer amount of time.  (This causes an updated "Set Cookie"
@@ -98,16 +98,16 @@ and exposed as \`req.me\`.)`
           'Received `rememberMe: true` from a virtual request, but it was ignored\n'+
           'because a browser\'s session cookie cannot be reset over sockets.\n'+
           'Please use a traditional HTTP request instead.'
-        );
+        )
       } else {
-        this.req.session.cookie.maxAge = sails.config.custom.rememberMeCookieMaxAge;
+        this.req.session.cookie.maxAge = sails.config.custom.rememberMeCookieMaxAge
       }
     }//ﬁ
 
     // Modify the active session instance.
     // (This will be persisted when the response is sent.)
-    this.req.session.userId = userRecord.id;
+    this.req.session.userId = userRecord.id
 
   }
 
-};
+}

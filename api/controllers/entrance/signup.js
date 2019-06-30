@@ -68,7 +68,7 @@ the account verification message.)`,
 
   fn: async function (inputs) {
 
-    var newEmailAddress = inputs.emailAddress.toLowerCase();
+    var newEmailAddress = inputs.emailAddress.toLowerCase()
 
     // Build up data for the new user record and save it to the database.
     // (Also use `fetch` to retrieve the new ID so that we can use it below.)
@@ -84,22 +84,22 @@ the account verification message.)`,
     }:{}))
     .intercept('E_UNIQUE', 'emailAlreadyInUse')
     .intercept({name: 'UsageError'}, 'invalid')
-    .fetch();
+    .fetch()
 
     // If billing feaures are enabled, save a new customer entry in the Stripe API.
     // Then persist the Stripe customer id in the database.
     if (sails.config.custom.enableBillingFeatures) {
       let stripeCustomerId = await sails.helpers.stripe.saveBillingInfo.with({
         emailAddress: newEmailAddress
-      }).timeout(5000).retry();
+      }).timeout(5000).retry()
       await User.updateOne({id: newUserRecord.id})
       .set({
         stripeCustomerId
-      });
+      })
     }
 
     // Store the user's new id in their session.
-    this.req.session.userId = newUserRecord.id;
+    this.req.session.userId = newUserRecord.id
 
     if (sails.config.custom.verifyEmailAddresses) {
       // Send "confirm account" email
@@ -111,11 +111,11 @@ the account verification message.)`,
           fullName: inputs.fullName,
           token: newUserRecord.emailProofToken
         }
-      });
+      })
     } else {
-      sails.log.info('Skipping new account email verification... (since `verifyEmailAddresses` is disabled)');
+      sails.log.info('Skipping new account email verification... (since `verifyEmailAddresses` is disabled)')
     }
 
   }
 
-};
+}

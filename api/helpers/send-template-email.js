@@ -86,9 +86,9 @@ module.exports = {
 
   fn: async function(inputs) {
 
-    var path = require('path');
-    var url = require('url');
-    var util = require('util');
+    var path = require('path')
+    var url = require('url')
+    var util = require('util')
 
 
     if (!_.startsWith(path.basename(inputs.template), 'email-')) {
@@ -98,7 +98,7 @@ module.exports = {
         'be namespaced in this way.  (This makes it easier to look up email templates by '+
         'filename; e.g. when using CMD/CTRL+P in Sublime Text.)\n'+
         'Continuing regardless...'
-      );
+      )
     }
 
     if (_.startsWith(inputs.template, 'views/') || _.startsWith(inputs.template, 'emails/')) {
@@ -111,16 +111,16 @@ module.exports = {
         'Or:\n'+
         '  template: \'admin/email-contact-form\'\n'+
         ' [?] If you\'re unsure or need advice, see https://sailsjs.com/support'
-      );
+      )
     }//•
 
     // Determine appropriate email layout and template to use.
-    var emailTemplatePath = path.join('emails/', inputs.template);
-    var layout;
+    var emailTemplatePath = path.join('emails/', inputs.template)
+    var layout
     if (inputs.layout) {
-      layout = path.relative(path.dirname(emailTemplatePath), path.resolve('layouts/', inputs.layout));
+      layout = path.relative(path.dirname(emailTemplatePath), path.resolve('layouts/', inputs.layout))
     } else {
-      layout = false;
+      layout = false
     }
 
     // Compile HTML template.
@@ -136,9 +136,9 @@ module.exports = {
       'Could not compile view template.\n'+
       '(Usually, this means the provided data is invalid, or missing a piece.)\n'+
       'Details:\n'+
-      err.message;
-      return err;
-    });
+      err.message
+      return err
+    })
 
     // Sometimes only log info to the console about the email that WOULD have been sent.
     // Specifically, if the "To" email address is anything "@example.com".
@@ -147,13 +147,13 @@ module.exports = {
     // > for convenience during development, but also for safety.  (For example,
     // > a special-cased version of "user@example.com" is used by Trend Micro Mars
     // > scanner to "check apks for malware".)
-    var isToAddressConsideredFake = Boolean(inputs.to.match(/@example\.com$/i));
+    var isToAddressConsideredFake = Boolean(inputs.to.match(/@example\.com$/i))
 
     // If that's the case, or if we're in the "test" environment, then log
     // the email instead of sending it:
     var dontActuallySend = (
       sails.config.environment === 'test' || isToAddressConsideredFake
-    );
+    )
     if (dontActuallySend) {
       sails.log(
         'Skipped sending email, either because the "To" email address ended in "@example.com"\n'+
@@ -167,7 +167,7 @@ module.exports = {
         'Body:\n'+
         htmlEmailContents+'\n'+
         '-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-'
-      );
+      )
     } else {
       // Otherwise, we'll check that all required Mailgun credentials are set up
       // and, if so, continue to actually send the email.
@@ -176,14 +176,14 @@ module.exports = {
         throw new Error(
           'Cannot deliver email to "'+inputs.to+'" because:\n'+
           (()=>{
-            let problems = [];
+            let problems = []
             if (!sails.config.custom.mailgunSecret) {
-              problems.push(' • Mailgun secret is missing from this app\'s configuration (`sails.config.custom.mailgunSecret`)');
+              problems.push(' • Mailgun secret is missing from this app\'s configuration (`sails.config.custom.mailgunSecret`)')
             }
             if (!sails.config.custom.mailgunDomain) {
-              problems.push(' • Mailgun domain is missing from this app\'s configuration (`sails.config.custom.mailgunDomain`)');
+              problems.push(' • Mailgun domain is missing from this app\'s configuration (`sails.config.custom.mailgunDomain`)')
             }
-            return problems.join('\n');
+            return problems.join('\n')
           })()+
           '\n'+
           'To resolve these configuration issues, add the missing config variables to\n'+
@@ -199,17 +199,17 @@ module.exports = {
           '> from the terminal output into your browser.)\n'+
           '\n'+
           '[?] If you\'re unsure, visit https://sailsjs.com/support'
-        );
+        )
       }
 
       var deferred = sails.helpers.mailgun.sendHtmlEmail.with({
         htmlMessage: htmlEmailContents,
         to: inputs.to,
         subject: inputs.subject
-      });
+      })
 
       if (inputs.ensureAck) {
-        await deferred;
+        await deferred
       } else {
         // FUTURE: take advantage of .background() here instead (when available)
         deferred.exec((err)=>{
@@ -219,22 +219,22 @@ module.exports = {
               util.inspect(inputs,{depth:null})+'\n',
               'Error details:\n'+
               util.inspect(err)
-            );
+            )
           } else {
             sails.log.info(
               'Background instruction complete:  Email sent (or at least queued):\n'+
               util.inspect(inputs,{depth:null})
-            );
+            )
           }
-        });//_∏_
+        })//_∏_
       }//ﬁ
     }//ﬁ
 
     // All done!
     return {
       loggedInsteadOfSending: dontActuallySend
-    };
+    }
 
   }
 
-};
+}
