@@ -68,4 +68,4 @@ module.exports.routes = {
   'POST /api/v1/node': { controller: 'NodesController', action: 'post', csrf:false },
   'DELETE /api/v1/node/:id': { controller: 'NodesController', action: 'delete', csrf: false },
 
-};
+}
