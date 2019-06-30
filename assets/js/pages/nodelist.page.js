@@ -57,11 +57,11 @@ parasails.registerPage('nodelist', {
     // },
     submitForm: async function() {
       this.syncing = true
-      console.log("I am submitting form", this.formData)
+      console.log('I am submitting form', this.formData)
       return new Promise((resolve, reject)=>{
         var xhr = new XMLHttpRequest()
 
-        xhr.open("POST", "/api/v1/node")
+        xhr.open('POST', '/api/v1/node')
         xhr.onreadystatechange = function () {
           if (this.readyState === 4) {
             if (this.status === 200) {
@@ -72,8 +72,8 @@ parasails.registerPage('nodelist', {
             }
           }
         }
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify({ "name": this.formData.nodeName }))
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+        xhr.send(JSON.stringify({ 'name': this.formData.nodeName }))
 
       })
     }
