@@ -1,3 +1,5 @@
+const Nodes = require('../models/Nodes')
+
 module.exports = {
 
 
@@ -14,21 +16,8 @@ module.exports = {
     },
   },
 
-  fn: async function () {
-    return {
-      nodes: [{
-          id: 0,
-          text: '1Vegetables'
-        },
-        {
-          id: 1,
-          text: '2Cheese'
-        },
-        {
-          id: 2,
-          text: '1Whatever else humans are supposed to eat'
-        }
-      ]
-    }
+  fn: async function (inputs, exits) {
+    let nodes = await Nodes.get()
+    exits.success({nodes:nodes})
   }
 }
