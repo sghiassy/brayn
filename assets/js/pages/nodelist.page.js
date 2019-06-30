@@ -3,6 +3,12 @@ parasails.registerPage('nodelist', {
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
+    syncing: false,
+    cloudError: false,
+    formErrors: false,
+    // Form data
+    formData: { /* … */ },
+
     nodes: []
   },
 
@@ -13,6 +19,7 @@ parasails.registerPage('nodelist', {
     // Attach any initial data from the server.
     _.extend(this, SAILS_LOCALS)
   },
+
   mounted: async function () {
     // var that = this
 
@@ -38,6 +45,32 @@ parasails.registerPage('nodelist', {
   //  ║║║║ ║ ║╣ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
-    //…
+    handleParsingForm: function () {
+      return this.formData
+    },
+    // submittedForm: async function () {
+    //   // Redirect to the account page on success.
+    //   // > (Note that we re-enable the syncing state here.  This is on purpose--
+    //   // > to make sure the spinner stays there until the page navigation finishes.)
+    //   this.syncing = true
+    //   console.log("I am syncing", this.formData)
+    // },
+    submitForm: async function() {
+      this.syncing = true
+      console.log("I am submitting form", this.formData)
+      return new Promise((resolve, reject)=>{
+        var xhr = new XMLHttpRequest()
+
+        xhr.open("POST", "/api/v1/node")
+        xhr.onreadystatechange = function () {
+          if (this.readyState === 4 && this.status === 200) {
+            resolve()
+          }
+        }
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify({ "name": this.formData.nodeName }))
+
+      })
+    }
   }
 })
