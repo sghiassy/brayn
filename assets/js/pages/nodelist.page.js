@@ -63,8 +63,13 @@ parasails.registerPage('nodelist', {
 
         xhr.open("POST", "/api/v1/node")
         xhr.onreadystatechange = function () {
-          if (this.readyState === 4 && this.status === 200) {
-            resolve()
+          if (this.readyState === 4) {
+            if (this.status === 200) {
+              console.log('POST worked with:', xhr.response)
+              resolve()
+            } else {
+              reject()
+            }
           }
         }
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
