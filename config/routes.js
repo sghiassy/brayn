@@ -64,9 +64,9 @@ module.exports.routes = {
   'POST  /api/v1/entrance/update-password-and-login':    { action: 'entrance/update-password-and-login' },
   'POST  /api/v1/deliver-contact-form-message':          { action: 'deliver-contact-form-message' },
 
-  'GET /api/v1/nodes': { controller: 'NodesController', action: 'get'},
-  'POST /api/v1/nodes': { controller: 'NodesController', action: 'post' },
-  'PUT /api/v1/nodes': { controller: 'NodesController', action: 'put' },
-  'DELETE /api/v1/nodes': { controller: 'NodesController', action: 'delete' },
+  'GET /api/v1/nodes': { controller: 'NodesController', action: 'get', },
+  'POST /api/v1/nodes': { controller: 'NodesController', action: 'post', csrf:false },
+  'PUT /api/v1/nodes': { controller: 'NodesController', action: 'put', csrf: false },
+  'DELETE /api/v1/nodes': { controller: 'NodesController', action: 'delete', csrf: false },
 
 };
