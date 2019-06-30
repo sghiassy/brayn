@@ -7,6 +7,7 @@ module.exports = {
   },
 
   post: async function (req, res) {
+    // eslint-disable-next-line eqeqeq
     if (req.body.name == undefined) {
       return res.send('Name was undefined in body:' + JSON.stringify(req.body))
     }
@@ -16,6 +17,7 @@ module.exports = {
   },
 
   delete: async function (req, res) {
+    // eslint-disable-next-line eqeqeq
     if (req.params.id == undefined) {
       return res.send('id is undefined:' + JSON.stringify(req.params))
     }

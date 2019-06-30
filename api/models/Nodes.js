@@ -1,3 +1,5 @@
+const GraphNode = require('./GraphNode')
+
 global.neo4j = require('neo4j-driver').v1
 
 const graphenedbURL = process.env.GRAPHENEDB_BOLT_URL || 'bolt://localhost:7687'
@@ -13,7 +15,13 @@ module.exports = {
       session
         .run('MATCH (n) RETURN { id: ID(n), name: n.name } LIMIT 25')
         .then((result) => {
-          resolve(result)
+          let nodes = result.records.map((record) => {
+            let nodeData = record['_fields'][0]
+            let id = nodeData.id.low
+            let name = nodeData.name
+            return new GraphNode(id, name)
+          })
+          resolve(nodes)
         })
         .catch((error) => {
           reject(error)
