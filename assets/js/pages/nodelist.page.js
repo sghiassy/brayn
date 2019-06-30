@@ -17,19 +17,20 @@ parasails.registerPage('nodelist', {
     var that = this
 
     setTimeout(() => {
-      that.nodes = [{
-        id: 0,
-        text: '1Vegetables'
+      // dynamically add data after render
+      that.nodes = _.union(that.nodes, [{
+        id: 034,
+        text: '54Vegetables'
       },
       {
-        id: 1,
-        text: '2Cheese'
+        id: 14,
+        text: '454Cheese'
       },
       {
-        id: 2,
-        text: '1Whatever else humans are supposed to eat'
+        id: 24,
+        text: '23Whatever else humans are supposed to eat'
       }
-      ]
+      ])
     }, 1000)
   },
 
