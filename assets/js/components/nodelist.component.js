@@ -30,4 +30,4 @@ parasails.registerComponent('nodeListz', {
         </node-list-item>
       </ol>
   `
-});
+})

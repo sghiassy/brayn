@@ -12,7 +12,7 @@ parasails.registerPage('welcome', {
   //  ╩═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╩═╝╚═╝
   beforeMount: function() {
     // Attach any initial data from the server.
-    _.extend(this, SAILS_LOCALS);
+    _.extend(this, SAILS_LOCALS)
   },
   mounted: async function() {
     //…
@@ -28,10 +28,10 @@ parasails.registerPage('welcome', {
     // corresponds with `:unused?` in the server-side route for this page.
     switch (virtualPageSlug) {
       case 'hello':
-        this.modal = 'example';
-        break;
+        this.modal = 'example'
+        break
       default:
-        this.modal = '';
+        this.modal = ''
     }
   },
 
@@ -41,7 +41,7 @@ parasails.registerPage('welcome', {
   methods: {
 
     clickOpenExampleModalButton: async function() {
-      this.goto('/welcome/hello');
+      this.goto('/welcome/hello')
       // Or, without deep links, instead do:
       // ```
       // this.modal = 'example';
@@ -49,7 +49,7 @@ parasails.registerPage('welcome', {
     },
 
     closeExampleModal: async function() {
-      this.goto('/welcome');
+      this.goto('/welcome')
       // Or, without deep links, instead do:
       // ```
       // this.modal = '';
@@ -57,4 +57,4 @@ parasails.registerPage('welcome', {
     },
 
   }
-});
+})

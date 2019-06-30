@@ -25,7 +25,7 @@ parasails.registerPage('contact', {
   //  ╩═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╩═╝╚═╝
   beforeMount: function() {
     // Attach any initial data from the server.
-    _.extend(this, SAILS_LOCALS);
+    _.extend(this, SAILS_LOCALS)
   },
   mounted: async function() {
     //…
@@ -39,46 +39,46 @@ parasails.registerPage('contact', {
     submittedForm: async function() {
 
       // Show the success message.
-      this.cloudSuccess = true;
+      this.cloudSuccess = true
 
     },
 
     handleParsingForm: function() {
 
       // Clear out any pre-existing error messages.
-      this.formErrors = {};
+      this.formErrors = {}
 
-      var argins = this.formData;
+      var argins = this.formData
 
       // Validate email:
       if(!argins.emailAddress) {
-        this.formErrors.emailAddress = true;
+        this.formErrors.emailAddress = true
       }
 
       // Validate name:
       if(!argins.fullName) {
-        this.formErrors.fullName = true;
+        this.formErrors.fullName = true
       }
 
       // Validate topic:
       if(!argins.topic) {
-        this.formErrors.topic = true;
+        this.formErrors.topic = true
       }
 
       // Validate message:
       if(!argins.message) {
-        this.formErrors.message = true;
+        this.formErrors.message = true
       }
 
       // If there were any issues, they've already now been communicated to the user,
       // so simply return undefined.  (This signifies that the submission should be
       // cancelled.)
       if (Object.keys(this.formErrors).length > 0) {
-        return;
+        return
       }
 
-      return argins;
+      return argins
     },
 
   }
-});
+})

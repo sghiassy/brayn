@@ -36,7 +36,7 @@ parasails.registerComponent('modal', {
 
       isMobileSafari: false,//« more on this below
       originalScrollPosition: undefined,//« more on this below
-    };
+    }
   },
 
   //  ╦ ╦╔╦╗╔╦╗╦
@@ -60,7 +60,7 @@ parasails.registerComponent('modal', {
   //  ╩═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╩═╝╚═╝
   beforeMount: function() {
     // If this is mobile safari, make note of it.
-    this.isMobileSafari = (typeof bowser !== 'undefined') && bowser.mobile && bowser.safari;
+    this.isMobileSafari = (typeof bowser !== 'undefined') && bowser.mobile && bowser.safari
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     // ^^So there's a bug in mobile safari that misplaces the caret when the keyboard opening
     // causes the page to scroll, so we need to do some special tricks to keep it from getting ugly.
@@ -76,7 +76,7 @@ parasails.registerComponent('modal', {
 
     if(this.isMobileSafari) {
       // Get our original scroll position before opening the modal and save it for later.
-      this.originalScrollPosition = $(window).scrollTop();
+      this.originalScrollPosition = $(window).scrollTop()
     }
   },
   mounted: function(){
@@ -91,7 +91,7 @@ parasails.registerComponent('modal', {
       // when clicked.
       backdrop: 'static',
       show: true
-    });
+    })
 
     // Attach listener for underlying custom modal closing event,
     // and when that happens, have Vue emit a custom "close" event.
@@ -108,21 +108,21 @@ parasails.registerComponent('modal', {
           'position': '',
           'left': '',
           'top': '',
-        });
+        })
 
         // Beckon to our siblings so they come out of hiding
         this.$get().parent().children().not(this.$el).css({
           'display': ''
-        });
+        })
 
         // Scroll to our original position when the modal was summoned.
-        window.scrollTo(0, this.originalScrollPosition);
+        window.scrollTo(0, this.originalScrollPosition)
       }//ﬁ
 
-      this._bsModalIsAnimatingOut = true;
-      this.$emit('close');
+      this._bsModalIsAnimatingOut = true
+      this.$emit('close')
 
-    });//œ
+    })//œ
 
     // Attach listener for underlying custom modal "opened" event,
     // and when that happens, have Vue emit our own custom "opened" event.
@@ -133,7 +133,7 @@ parasails.registerComponent('modal', {
       // If this is mobile safari, let's get wacky.
       if(this.isMobileSafari) {
         // Scroll to the top of the page.
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 0)
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // ^^FUTURE: Don't actually do this -- instead, try setting `top` of the
         // modal to whatever the original scrollTop of our window was.  This
@@ -145,7 +145,7 @@ parasails.registerComponent('modal', {
         // Hide siblings to lop off any extra space at the bottom.
         this.$get().parent().children().not(this.$el).css({
           'display': 'none'
-        });
+        })
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // ^^FUTURE: Instead of just hiding siblings, which isn't perfect and won't
         // always work for everyone, try grabbing outerHeight of the modal element
@@ -161,18 +161,18 @@ parasails.registerComponent('modal', {
           'position': 'absolute',
           'left': '0',
           'top': '0',
-        });
+        })
       }//ﬁ
 
       // Focus our "focus-first" field, if relevant.
       // (but not on mobile, because it can get weird)
       if(typeof bowser !== 'undefined' && !bowser.mobile && this.$find('[focus-first]').length > 0) {
-        this.$focus('[focus-first]');
+        this.$focus('[focus-first]')
       }
 
-      this.$emit('opened');
-      $(this.$el).off('shown.bs.modal');
-    });//ƒ
+      this.$emit('opened')
+      $(this.$el).off('shown.bs.modal')
+    })//ƒ
   },
   // ^Note that there is no `beforeDestroy()` lifecycle callback in this
   // component. This is on purpose, since the timing vs. `leave()` gets tricky.
@@ -192,7 +192,7 @@ parasails.registerComponent('modal', {
       // spinlock to make sure.  If it turns out that we HAVEN'T started that process
       // yet, then we go ahead and start it now.
       if (!this._bsModalIsAnimatingOut) {
-        $(this.$el).modal('hide');
+        $(this.$el).modal('hide')
       }//ﬁ
 
       // When the bootstrap modal finishes animating into nothingness, unbind all
@@ -213,13 +213,13 @@ parasails.registerComponent('modal', {
       // > For more info, see:
       // > https://github.com/vuejs/vue-router/issues/1302#issuecomment-291207073
       $(this.$el).on('hidden.bs.modal', ()=>{
-        $(this.$el).off('hide.bs.modal');
-        $(this.$el).off('hidden.bs.modal');
-        $(this.$el).off('shown.bs.modal');
-        done();
-      });//_∏_
+        $(this.$el).off('hide.bs.modal')
+        $(this.$el).off('hidden.bs.modal')
+        $(this.$el).off('shown.bs.modal')
+        done()
+      })//_∏_
 
     },
 
   }
-});
+})

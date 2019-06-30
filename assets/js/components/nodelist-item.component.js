@@ -24,4 +24,4 @@ parasails.registerComponent('nodeListItem', {
   template: `
     <li>Node: {{node.text}}</li>
   `
-});
+})

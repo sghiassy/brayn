@@ -11,7 +11,7 @@ parasails.registerPage('confirmed-email', {
   //  ╩═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╩═╝╚═╝
   beforeMount: function() {
     // Attach any initial data from the server.
-    _.extend(this, SAILS_LOCALS);
+    _.extend(this, SAILS_LOCALS)
   },
   mounted: async function(){
     //…
@@ -23,4 +23,4 @@ parasails.registerPage('confirmed-email', {
   methods: {
     //…
   }
-});
+})

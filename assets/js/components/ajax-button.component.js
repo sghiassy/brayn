@@ -23,7 +23,7 @@ parasails.registerComponent('ajaxButton', {
   data: function (){
     return {
       //…
-    };
+    }
   },
 
   //  ╦ ╦╔╦╗╔╦╗╦
@@ -62,8 +62,8 @@ parasails.registerComponent('ajaxButton', {
   methods: {
 
     click: async function(){
-      this.$emit('click');
+      this.$emit('click')
     },
 
   }
-});
+})
