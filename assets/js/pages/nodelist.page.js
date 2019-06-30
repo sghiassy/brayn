@@ -45,6 +45,25 @@ parasails.registerPage('nodelist', {
   //  ║║║║ ║ ║╣ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
+    delete: async function () {
+      return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function () {
+          if (this.readyState === 4) {
+            if (this.status === 200) {
+              console.log('DELETE worked with:', xhr.response)
+              resolve()
+            } else {
+              reject()
+            }
+          }
+        }
+        xhr.open("DELETE", "/api/v1/node/" + this.node.id)
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+        xhr.send()
+      })
+    },
+
     handleParsingForm: function () {
       return this.formData
     },

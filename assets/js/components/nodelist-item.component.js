@@ -22,6 +22,13 @@ parasails.registerComponent('nodeListItem', {
   //  ╠═╣ ║ ║║║║
   //  ╩ ╩ ╩ ╩ ╩╩═╝
   template: `
-    <li>Node: {{node.name}}</li>
-  `
+    <li>Node: {{node.name}} <button class="destroy" @click="removeNode(node)"></button></li>
+
+  `,
+
+  methods: {
+    removeNode: function(node) {
+      console.log('removeNode was called', node)
+    }
+  }
 })
