@@ -1,0 +1,22 @@
+<div id="nodelist" v-cloak>
+
+  <h1>TODO: Implement this page.</h1>
+  <p>(See also <em>assets/styles/pages/nodelist.less</em>, <em>assets/js/pages/nodelist.page.js</em>, and <em>api/controllers/view-nodelist.js</em>.)</p>
+  <node-listz v-bind:nodes="nodes"></node-listz>
+  <!-- <form onSubmit={this.handleSubmit}>
+    <input name="name" id="name" value="" value={this.state.value} onChange={this.handleChange} />
+    <input type="submit" value="Submit" />
+  </form> -->
+  <ajax-form :handle-submitting="submitForm" :syncing.sync="syncing" :cloud-error.sync="cloudError"
+    :handle-parsing="handleParsingForm">
+    <div class="form-group">
+      <label for="node-name">Node name</label>
+      <input class="form-control" id="node-name" name="node-name" type="text"
+        v-model.trim="formData.nodeName"
+        placeholder="Sturgis P. Sturgeon" autocomplete="name" focus-first>
+      <div class="invalid-feedback" v-if="formErrors.nodeName">Please enter your full name.</div>
+      <ajax-button type="submit" :syncing="syncing" class="btn btn-dark">Save changes</ajax-button>
+    </div>
+  </ajax-form>
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>
