@@ -35,15 +35,23 @@ yarn-error.log
 .idea/
 .vscode/
 
-##### Android
-*.iml
+##### Java/Android
+.classpath
+.externalNativeBuild
 .gradle
-/local.properties
-/.idea/workspace.xml
+.project
+*.class
+*.iml
 /.idea/libraries
+/.idea/workspace.xml
+/.settings/
+/bin/
 /build
 /captures
-.externalNativeBuild
+/local.properties
+*.jar
+*.war
+*.ear
 
 #### Selenium
 selenium-debug.log
