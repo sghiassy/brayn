@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "sls deploy"
+    "deploy": "./gradlew shadowJar; sls deploy"
   },
   "keywords": [],
   "author": "",
